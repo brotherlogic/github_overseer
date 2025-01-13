@@ -12,7 +12,7 @@ and then specializations depending on the nature of the repository.
 
 ## Process
 
-Runs in the background, every X minutes.
+Runs in the background, every 5 minutes.
 
 1. Gets a list of all the repos
 1. Gets the .repository file, reads the text proto within
