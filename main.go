@@ -18,5 +18,11 @@ func main() {
 	}
 
 	// Get all the repos
-	ghclient.GetRepos(ctx)
+	repos, err := ghclient.GetRepos(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Printf("Found %v repos", len(repos.GetRepos()))
+
 }
