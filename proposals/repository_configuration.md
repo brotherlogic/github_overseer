@@ -22,3 +22,13 @@ Runs in the background, every 5 minutes.
         1. PROCESS
     1. Configure the repo appropriately
         1. Adds in the PERSONAL_TOKEN secret
+
+## Tasks
+
+1. Overseer runs a prints the count of all the repos
+1. githubridge: Support reading file from repo
+1. Repository proto defined
+1. Overseer reads .repository file and parses proto
+1. Raise issue on missing repo file
+1. githubridge: support setting secrets
+1. If repo type is CODE -> add personal token secret
