@@ -20,3 +20,13 @@ Tasklists are created under the repo that created the files, unless tasks are pr
 a colon, in which case they are placed under that repo.
 
 ## Tasks
+
+1. githubridge: Githubridge supports listing files in the repo
+1. Overseer runs through each project and builds a mapping from repo -> latest hash
+1. Overseer tracks file listing to given hash
+1. Overseer can scan a repo and find md files
+1. githubridge: Githubridge supports listing contents of file in repo
+1. Overseer can analyze a file and pull tasks out of a given file
+1. Build a representation of the task state for the given hash
+1. Find the first open task and file a bug and adjust the document to attach the bug ref
+1. Overseer checks task bugs on startup - if issue is closed, add a strikeout to the document
