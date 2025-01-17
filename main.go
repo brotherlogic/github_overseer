@@ -6,6 +6,7 @@ import (
 	"time"
 
 	ghbclient "github.com/brotherlogic/githubridge/client"
+	ghbpb "github.com/brotherlogic/githubridge/proto"
 )
 
 func main() {
@@ -18,7 +19,9 @@ func main() {
 	}
 
 	// Get all the repos
-	repos, err := ghclient.GetRepos(ctx)
+	repos, err := ghclient.GetRepos(ctx, &ghbpb.GetReposRequest{
+		User: "brotherlogic",
+	})
 	if err != nil {
 		panic(err)
 	}
