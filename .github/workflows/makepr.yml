@@ -1,0 +1,17 @@
+name: Create production promotion pull request
+on:
+  push:
+
+permissions:
+  pull-requests: write
+
+jobs:
+ pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: pull-request
+        run: |
+          gh pr create --title "My pull request" --body "Description" || gh pr edit --title "My pull request" --body "Description"
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}

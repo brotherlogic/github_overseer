@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: github_overseer
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: github_overseer
+              image: registry.brotherlogic-backend.com/brotherlogic/github_overseer:0.1098.0 # {"$imagepolicy": "flux-system:github_overseer"}
+          restartPolicy: OnFailure
+          imagePullSecrets:
+            - name: regcred
