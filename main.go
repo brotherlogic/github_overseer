@@ -26,6 +26,5 @@ func main() {
 		panic(err)
 	}
 
-	log.Printf("Found %v repos", len(repos.GetRepos()))
-
+	log.Printf("Found %v repos to process", len(repos.GetRepos()))
 }
