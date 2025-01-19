@@ -9,7 +9,7 @@ spec:
       template:
         spec:
           containers:
-            - name: github_overseer
+            - name: github-overseer
               image: registry.brotherlogic-backend.com/brotherlogic/github_overseer:0.6.0 # {"$imagepolicy": "flux-system:github-overseer"}
           restartPolicy: OnFailure
           imagePullSecrets:
