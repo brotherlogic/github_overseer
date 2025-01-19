@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
             - name: github_overseer
-              image: registry.brotherlogic-backend.com/brotherlogic/github_overseer:0.1098.0 # {"$imagepolicy": "flux-system:github_overseer"}
+              image: registry.brotherlogic-backend.com/brotherlogic/github_overseer:0.1098.0 # {"$imagepolicy": "flux-system:github-overseer"}
           restartPolicy: OnFailure
           imagePullSecrets:
             - name: regcred
