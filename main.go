@@ -71,7 +71,7 @@ func main() {
 		}
 
 		if recordedHash != grepo.GetSha1() {
-			trackTasks(ctx, repo)
+			trackTasks(ctx, repo, config, ghclient)
 			config.RepoMap[repo] = grepo.GetSha1()
 		}
 	}

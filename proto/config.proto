@@ -6,4 +6,13 @@ option go_package = "github.com/brotherlogic/github_overseer/proto";
 
 message Config {
     map<string, string> repo_map = 1;
+    repeated TrackedDocument tracked_documents = 2;
+}
+
+message TrackedDocument {
+    string user = 1;
+    string repo = 2;
+    string path = 3;
+
+    string latest_hash = 4;
 }
