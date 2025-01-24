@@ -3,10 +3,10 @@ module github.com/brotherlogic/github_overseer
 go 1.23.5
 
 require (
-	github.com/brotherlogic/githubridge v0.2837.0
+	github.com/brotherlogic/githubridge v0.2839.0
 	github.com/brotherlogic/pstore v0.31.0
-	google.golang.org/grpc v1.69.4
-	google.golang.org/protobuf v1.36.3
+	google.golang.org/grpc v1.70.0
+	google.golang.org/protobuf v1.36.4
 )
 
 require (
