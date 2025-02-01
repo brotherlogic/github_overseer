@@ -15,4 +15,34 @@ message TrackedDocument {
     string path = 3;
 
     string latest_hash = 4;
+
+    TaskList tasklist = 5;
+}
+
+message TaskList {
+    repeated Task tasks = 1;
+}
+
+message Task {
+    // The text of the task to complet
+    string task = 1;
+
+    // Tasks can be placed outside of the created repo
+    // This stores the intended repo
+    string bounced_repo = 2;
+
+    enum TaskState {
+        TASK_STATE_UNKNOWN = 0;
+        TASK_STATE_IN_PROGRESS = 1;
+        TASK_STATE_BLOCKED = 2;
+        TASK_STATE_COMPLETE = 3;
+    }
+    TaskState state = 3;
+
+    // Associated issue - negative number here indicates that
+    // there is no associated issue
+    int32 issue_id = 4;
+
+    // The number of the task in the given list
+    int32 index_number = 5;
 }
