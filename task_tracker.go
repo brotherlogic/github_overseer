@@ -44,8 +44,53 @@ func trackTasks(ctx context.Context, repo string, config *pb.Config, client ghbc
 	}
 
 	for _, file := range files.GetFiles() {
-		if strings.HasSuffix(file, ".md") {
+		if strings.HasSuffix(file.GetName(), ".md") {
 			createOrUpdateConfig(ctx, repo, file.GetName(), file.GetHash(), config)
 		}
 	}
+
+	// Look for tasks
+	for _, tDoc := range config.TrackedDocuments {
+		err = processDocument(ctx, tDoc, client)
+		if err != nil {
+			return err
+		}
+	}
+}
+
+func processDocument(ctx context.Context, tDoc *pb.TrackedDocument, client ghbclient.GithubridgeClient) error {
+	// Download the doc
+	data, err := client.GetFile(ctx, &ghbpb.GetFileRequest{
+		User: "brotherlogic",
+		Repo: tDoc.GetRepo(),
+		Path: tDoc.GetPath(),
+	})
+
+	if err != nil {
+		return err
+	}
+
+	file := string(data.GetContent())
+	inTasks := false
+	index := int32(1)
+	var tasks []*pb.Task
+	for _, line := range strings.Split(file, "\n") {
+		if strings.HasPrefix(strings.TrimSpace(line), "## Tasks") {
+			inTasks = true
+		}
+
+		if inTasks {
+			if strings.HasPrefix(strings.TrimSpace(line), "1.") {
+				taskBody := strings.Split(strings.TrimSpace(line), "1.")[1]
+				tasks = append(tasks, &pb.Task{
+					Task:        taskBody,
+					IndexNumber: index,
+					IssueId:     -1,
+				})
+				index++
+			}
+		}
+	}
+
+	return nil
 }
