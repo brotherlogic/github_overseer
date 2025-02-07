@@ -21,7 +21,7 @@ a colon, in which case they are placed under that repo.
 
 ## Tasks
 
-1. Overseer builds a docker rep and uploads the repo
+1. Overseer builds a docker rep and uploads the repo [brotherlogic/github_overseer/1]
 1. fleet-infra: overseer loads in the repo
 1. githubridge: Githubridge supports listing files in the repo
 1. Overseer runs through each project and builds a mapping from repo -> latest hash
