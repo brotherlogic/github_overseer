@@ -21,6 +21,14 @@ const (
 	CONFIG_KEY = "github.com/brotherlogic/github_overseer/config"
 )
 
+func printSummary(ctx context.Context, config *pb.Config) {
+	log.Printf("Tracking %v tasks\n", len(config.GetTrackedDocuments()))
+	log.Printf("-----------------\n")
+	for i, task := range config.GetTrackedDocuments() {
+		log.Printf("%v. %v:%v\n", i+1, task.GetRepo(), task.GetPath())
+	}
+}
+
 func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*5)
 	defer cancel()
@@ -84,5 +92,7 @@ func main() {
 		Key:   CONFIG_KEY,
 		Value: &anypb.Any{Value: data},
 	})
+
+	printSummary(ctx, config)
 	log.Printf("Finished run: %v", err)
 }
