@@ -78,7 +78,7 @@ func main() {
 			log.Fatalf("Error getting repo: %v", err)
 		}
 
-		if recordedHash != grepo.GetSha1() {
+		if recordedHash != grepo.GetSha1() || repo == "github_overseer" {
 			trackTasks(ctx, repo, config, ghclient)
 			config.RepoMap[repo] = grepo.GetSha1()
 		}
