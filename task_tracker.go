@@ -41,7 +41,7 @@ func trackTasks(ctx context.Context, repo string, config *pb.Config, client ghbc
 	})
 
 	if err != nil {
-		return err
+		return fmt.Errorf("Unable to list files %w", err)
 	}
 
 	for _, file := range files.GetFiles() {
@@ -54,7 +54,7 @@ func trackTasks(ctx context.Context, repo string, config *pb.Config, client ghbc
 	for _, tDoc := range config.TrackedDocuments {
 		err = processDocument(ctx, tDoc, client)
 		if err != nil {
-			return err
+			return fmt.Errorf("Error processing document %w", err)
 		}
 	}
 
