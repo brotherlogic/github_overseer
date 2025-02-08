@@ -11,6 +11,9 @@ RUN go mod download
 
 COPY *.go ./
 
+RUN mkdir proto
+COPY proto/*.go ./proto/
+
 RUN CGO_ENABLED=0 go build -o /github_overseer
 
 ##
