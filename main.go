@@ -75,7 +75,7 @@ func main() {
 			Repo: repo,
 		})
 		if err != nil {
-			log.Fatalf("Error getting repo: %v", err)
+			log.Fatalf("Error getting repo (%v): %v", repo, err)
 		}
 
 		if recordedHash != grepo.GetSha1() || repo == "github_overseer" {
