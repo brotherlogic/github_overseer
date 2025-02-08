@@ -33,7 +33,7 @@ func createOrUpdateConfig(ctx context.Context, repo, path, hash string, config *
 }
 
 func trackTasks(ctx context.Context, repo string, config *pb.Config, client ghbclient.GithubridgeClient) error {
-	log.Printf("Tracking tasks for %v", repo)
+	log.Printf("Tracking tthe asks for %v", repo)
 
 	files, err := client.ListFiles(ctx, &ghbpb.ListFilesRequest{
 		User: "brotherlogic",
