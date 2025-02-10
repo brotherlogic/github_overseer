@@ -107,22 +107,36 @@ func processDocument(ctx context.Context, tDoc *pb.TrackedDocument, client ghbcl
 }
 
 func buildTasks(ctx context.Context, file string, tasks []*pb.Task, client ghbclient.GithubridgeClient) (string, error) {
-	for _, task := range tasks {
+	for i, task := range tasks {
 		// We have a task entered for this one
-		if task.IssueId > 0 {
-			if task.State == pb.Task_TASK_STATE_IN_PROGRESS {
-				// Check to see if we've finished this task
-				issue, err := client.GetIssue(ctx, &ghbpb.GetIssueRequest{
-					User: "brotherlogic",
-					Repo: task.GetBouncedRepo(),
-					Id:   task.GetIssueId()})
-				if err != nil {
-					return "", err
-				}
+		if task.IssueId <= 0 {
+			// Create a task and store it
+			issue, err := client.CreateIssue(ctx, &ghbpb.CreateIssueRequest{
+				User:  "brotherlogic",
+				Repo:  task.GetBouncedRepo(),
+				Title: task.GetTask(),
+			})
+			if err != nil {
+				return "", err
 
-				if issue.GetState() == ghbpb.IssueState_ISSUE_STATE_CLOSED {
-					task.State = pb.Task_TASK_STATE_COMPLETE
-				}
+			}
+			task.IndexNumber = int32(i)
+			task.IssueId = int32(issue.GetIssueId())
+			task.State = pb.Task_TASK_STATE_UNKNOWN
+		}
+
+		if task.State == pb.Task_TASK_STATE_IN_PROGRESS {
+			// Check to see if we've finished this task
+			issue, err := client.GetIssue(ctx, &ghbpb.GetIssueRequest{
+				User: "brotherlogic",
+				Repo: task.GetBouncedRepo(),
+				Id:   task.GetIssueId()})
+			if err != nil {
+				return "", err
+			}
+
+			if issue.GetState() == ghbpb.IssueState_ISSUE_STATE_CLOSED {
+				task.State = pb.Task_TASK_STATE_COMPLETE
 			}
 		}
 
