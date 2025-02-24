@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: github-overseer
 spec:
-  schedule: "0 * * * *"
+  schedule: "0 0 * * *"
   jobTemplate:
     spec:
       template:
